@@ -29,8 +29,6 @@ def choose(paragraphs, select, k):
     >>> choose(ps, s, 2)
     ''
     """
-    # BEGIN PROBLEM 1
-    "*** YOUR CODE HERE ***"
     counter = -1
     for item in paragraphs:
         if select(item) == True:
@@ -39,7 +37,6 @@ def choose(paragraphs, select, k):
                 return item
     if counter < k:
         return ''
-    # END PROBLEM 1
 
 
 def about(topic):
@@ -56,8 +53,6 @@ def about(topic):
     'Nice pup.'
     """
     assert all([lower(x) == x for x in topic]), 'topics should be lowercase.'
-    # BEGIN PROBLEM 2
-    "*** YOUR CODE HERE ***"
     def select(paragraph):
         was_it_there = False
         for word in split(paragraph):
@@ -65,7 +60,6 @@ def about(topic):
                 was_it_there = True
         return was_it_there
     return select
-    # END PROBLEM 2
 
 
 def accuracy(typed, reference):
@@ -93,8 +87,6 @@ def accuracy(typed, reference):
     """
     typed_words = split(typed)
     reference_words = split(reference)
-    # BEGIN PROBLEM 3
-    "*** YOUR CODE HERE ***"
     accurate_words = 0
     i = 0
 
@@ -113,8 +105,6 @@ def accuracy(typed, reference):
             i += 1
         return accurate_words / len(typed_words) * 100
 
-    # END PROBLEM 3
-
 
 def wpm(typed, elapsed):
     """Return the words-per-minute (WPM) of the TYPED string.
@@ -129,10 +119,7 @@ def wpm(typed, elapsed):
     2.0
     """
     assert elapsed > 0, 'Elapsed time must be positive'
-    # BEGIN PROBLEM 4
-    "*** YOUR CODE HERE ***"
     return (len(typed) / 5) / (elapsed / 60)
-    # END PROBLEM 4
 
 
 ###########
@@ -157,8 +144,6 @@ def autocorrect(typed_word, valid_words, diff_function, limit):
     >>> autocorrect("tosting", ["testing", "asking", "fasting"], first_diff, 10)
     'testing'
     """
-    # BEGIN PROBLEM 5
-    "*** YOUR CODE HERE ***"
     list_of_differences = [[valid_words[i], diff_function(typed_word, valid_words[i], limit)] for i in range(len(valid_words))]
     minimum_difference = min(list_of_differences, key = lambda item: item[1])
     if minimum_difference[1] > limit:
@@ -168,10 +153,7 @@ def autocorrect(typed_word, valid_words, diff_function, limit):
             return typed_word
     else:
         return min(list_of_differences, key = lambda item: item[1])[0]
-        
-        
-
-    # END PROBLEM 5
+     
 
 
 def sphinx_switches(start, goal, limit):
@@ -196,7 +178,6 @@ def sphinx_switches(start, goal, limit):
     >>> sphinx_switches("rose", "hello", big_limit)   # Substitute: r->h, o->e, s->l, e->l, length difference of 1.
     5
     """
-    # BEGIN PROBLEM 6
     if limit < 0:
         return abs(len(goal)-len(start))
     if len(start) == 0 and len(goal) >= 1:
@@ -209,7 +190,6 @@ def sphinx_switches(start, goal, limit):
         return 1 + sphinx_switches(start[1:], goal[1:], limit - 1)
     if start[0] == goal[0]:
         return sphinx_switches(start[1:], goal[1:], limit)
-    # END PROBLEM 6
 
 
 def pawssible_patches(start, goal, limit):
@@ -245,8 +225,6 @@ def pawssible_patches(start, goal, limit):
         substitute = 1 + pawssible_patches(start[1:], goal[1:], limit - 1)
         return min(add, remove, substitute)
         
-    
-
 
 def final_diff(start, goal, limit):
     """A diff function that takes in a string START, a string GOAL, and a number LIMIT.
@@ -254,7 +232,7 @@ def final_diff(start, goal, limit):
     assert False, 'Remove this line to use your final_diff function.'
 
 
-FINAL_DIFF_LIMIT = 6  # REPLACE THIS WITH YOUR LIMIT
+FINAL_DIFF_LIMIT = 6 
 
 
 ###########
@@ -285,8 +263,6 @@ def report_progress(typed, prompt, user_id, send):
     ID: 3 Progress: 0.2
     0.2
     """
-    # BEGIN PROBLEM 8
-    "*** YOUR CODE HERE ***"
     counter = 0
     for w in range(len(prompt)):
         if w > len(typed) - 1 or typed[w] != prompt[w]:
@@ -295,9 +271,6 @@ def report_progress(typed, prompt, user_id, send):
         if typed[w] == prompt[w]:
             counter += 1
     
-
-    # END PROBLEM 8
-
 
 def fastest_words_report(times_per_player, words):
     """Return a text description of the fastest words typed by each player."""
@@ -327,9 +300,6 @@ def time_per_word(times_per_player, words):
     >>> all_times(game)
     [[6, 3, 6, 2], [10, 6, 1, 2]]
     """
-    # BEGIN PROBLEM 9
-    "*** YOUR CODE HERE ***"
-
     differences = [] 
     for x in times_per_player:
         diff = []
@@ -338,10 +308,6 @@ def time_per_word(times_per_player, words):
             diff.append(time_diff1)
         differences.append(diff)
     return game(words, differences)
-
-
-    
-    # END PROBLEM 9
 
 
 def fastest_words(game):
@@ -357,8 +323,6 @@ def fastest_words(game):
     """
     player_indices = range(len(all_times(game)))  # contains an *index* for each player
     word_indices = range(len(all_words(game)))    # contains an *index* for each word
-    # BEGIN PROBLEM 10
-    "*** YOUR CODE HERE ***"
     scores = []
     for player in player_indices:
         scores.append([])
@@ -373,15 +337,6 @@ def fastest_words(game):
                 break
             i += 1
     return scores
-
-        
-
-
-
-
-
-    # END PROBLEM 10
-
 
 def game(words, times):
     """A data abstraction containing all words typed and their times."""
